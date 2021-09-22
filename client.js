@@ -1,14 +1,8 @@
 const net = require("net");
-const { stdin } = require("process");
+const { setupInput } = require('./input');
 // establishes a connection with the game server
 const connect = function () {
-  const setupInput = function () {
-    const stdin = process.stdin;
-    stdin.setRawMode(true);
-    stdin.setEncoding("utf8");
-    stdin.resume();
-    return stdin;
-      };
+  
   const conn = net.createConnection({
     host: '135.23.223.133',
     port: 50542,
@@ -25,7 +19,7 @@ const connect = function () {
   });
 
   conn.on('connect', () => {
-    const moves = ['Move: up', 'Move: up', 'Move: left', 'Move: left', 'Move: up'];
+    const moves = ['Move: up', 'Move: up', 'Move: left', 'Move: left', 'Move: up', 'Move: up', 'Move: up', 'Move: left', 'Move: left', 'Move: up'];
 
     let delay = 0;
 
@@ -33,7 +27,7 @@ const connect = function () {
     setTimeout(() => {
     conn.write(move), delay;
    },
-    delay += 500);
+    delay += 50);
    }
   });
 
@@ -42,21 +36,9 @@ const connect = function () {
     console.log(`Server says: ${data}`);
   });
 
-  const handleUserInput = function () {
-    // your code here
-    if (key === '\u0003') {
-      console.log('disconnecting');
-      process.exit();
-    }
-  };
-
-  stdin.on("data", handleUserInput);
-
 
   return conn;
 };
-
-console.log("Connecting ...");
 
 module.exports = {
     connect,
