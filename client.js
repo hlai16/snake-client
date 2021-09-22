@@ -16,19 +16,11 @@ const connect = function () {
   conn.on('connect', () => {
     console.log('Joan is in da house!');
     conn.write('Name: JL');
-  });
-
-  conn.on('connect', () => {
-    const moves = ['Move: up', 'Move: up', 'Move: left', 'Move: left', 'Move: up', 'Move: up', 'Move: up', 'Move: left', 'Move: left', 'Move: up'];
-
-    let delay = 0;
-
-    for (const move of moves) {
-    setTimeout(() => {
-    conn.write(move), delay;
-   },
-    delay += 50);
-   }
+    // const callback = () => {
+    //   conn.write('Move: up');
+    // }
+    // const delay = 50;
+    // setInterval(callback, delay);
   });
 
   conn.on('data', (data) => {
