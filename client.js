@@ -16,6 +16,7 @@ const connect = function () {
   conn.on('connect', () => {
     console.log('Joan is in da house!');
     conn.write('Name: JL');
+    conn.write('Say: I brought 🍕!')
     // const callback = () => {
     //   conn.write('Move: up');
     // }
